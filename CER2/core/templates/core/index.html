@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+{% block title %} 
+    Inicio
+{% endblock %}
+{% block header %} 
+{% endblock %}
+{% block content %} 
+    <div class="container">
+        <div class="row">
+            <h1>Listado de corespondencias recibidas</h1>
+            <br><br><br><br>
+        </div>
+        <div class="row">
+
+            <!-- Barra de busqueda y boton para filtrar-->
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+            method="POST">
+              {% csrf_token %}
+              <div class="input-group">
+                <input type="text" class="form-control bg-light border-0 small" placeholder="Filtrar..." name="buscar" value="{{ request.POST.buscar }}">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-dark">Buscar</button>
+                </div>
+              </div>
+            </form>
+
+
+            <br><br><br><br>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table table-striped">        <!-- Funcion para poner una tabla con estilos de bootstrap-->
+                        <thead>                                  <!-- Pone los titulos de las columnas -->
+                            <tr>
+                                <th>Fecha de recepci&oacute;n</th>
+                                <th>Conserje</th>
+                                <th>Remitente</th>
+                                <th>Destinatario</th>
+                                <th>Estado</th>
+                                <th>N&uacute;mero de residencia</th>
+                            </tr>
+                        </thead>
+                        <tbody>             
+                         {% for c in correspondencias %}                <!-- Recorre la tabla correspondencias pasada como parametro-->
+                        <tr>                                            <!-- extrae los datos de la tabla 1 por 1 y los ubica en -->
+                            <td>{{c.fecha_recepcion}}</td>              <!-- su columna (atributo) correspondiente-->         
+                            <td>{{c.conserje}}</td>
+                            <td>{{c.remitente}}</td>
+                            <td>{{c.destinatario}}</td>
+                            <td>{{c.estado}}</td>
+                            <td>{{c.nro_residencia}}</td>
+                        </tr>
+                        {% endfor %}  
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

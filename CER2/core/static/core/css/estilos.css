@@ -1,0 +1,6 @@
+.cajas{
+    box-sizing: border-box;
+    width: 400px;
+    height: 520px;
+    border: 2px solid black;
+}
